@@ -19,7 +19,7 @@ export default function AddPets(){
 
         try {
             const response = await axios.post(
-                `https://api.cloudinary.com/v1_1/dtog9vbm2/image/upload`, // Replace with your Cloudinary cloud name
+                `https://api.cloudinary.com/v1_1/duxrhg4s0/image/upload`, // Replace with your Cloudinary cloud name
                 formData
             );
             saveData(response.data.secure_url)
