@@ -4,7 +4,8 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
- HEAD
+
+
 pnpm-debug.log*
 lerna-debug.log*
 
@@ -157,4 +158,7 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+<<<<<<< HEAD
  228944b0edafbbf2b2eb69ec6d7d104a9c133d6d
+=======
+>>>>>>> 1ca58a492a67477fe1cf8855615c39f9542f5966
