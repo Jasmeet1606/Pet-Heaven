@@ -5,11 +5,7 @@ import Header from "./Header";
 
 
 export default function Layout(){
-      let {pathname}=useLocation()
-        useEffect(()=>{
-            window.scrollTo(0,0)
-        },[pathname])
-
+    
     return(
         <>
         <Header/>
