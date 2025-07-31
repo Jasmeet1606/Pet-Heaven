@@ -104,7 +104,7 @@ export default function NgoHeader(){
                     Home
                     </Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                     <Link to={"/Ngo/pet/add"} className="nav-link">
                     AddPet
                     </Link>
@@ -113,11 +113,21 @@ export default function NgoHeader(){
                     <Link to={"/Ngo/pet/manage"} className="nav-link">
                     ManagePet
                     </Link>
-                </li> 
+                </li>  */}
+                         <li class="dropdown nav-item">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Pets
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <Link class="dropdown-item" to={"/Ngo/pet/details"}>Add Pets</Link>
+                        <Link class="dropdown-item" to={"/Ngo/pet/dogs"}>Manage Pets</Link>
+                      
+                    </div>
+                </li>
 
                 <li class="dropdown nav-item">
                     <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Pets
+                        Pe
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <Link class="dropdown-item" to={"/Ngo/pet/details"}>Details</Link>

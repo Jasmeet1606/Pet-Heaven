@@ -83,7 +83,7 @@ export default function Header() {
                 id="ftco-navbar"
             >
 
-                <div className="container">
+                {/* <div className="container">
                     <a className="navbar-brand" href="index.html">
                         <span className="flaticon-pawprint-1 mr-2" />
                         Pet Heaven
@@ -133,6 +133,11 @@ export default function Header() {
                                     Adopt Pet
                                 </Link>
                             </li> 
+                             <li className={`nav-item ${pathname == "/ReqForm" && "active"}`}>
+                                <Link to={"/ReqForm"} className="nav-link">
+                                     Adoption form
+                                </Link>
+                            </li> 
                                 
 
                                 {
@@ -150,16 +155,133 @@ export default function Header() {
                                         </li>
 
                                 }
-                                
-                               <li className={`nav-item ${pathname == "/Components/Pages/Payment" && "active"}`}>
-                                <Link to={"/Components/Pages/Payment"} className="nav-link">
-                                    Pay
-                                </Link>
-                            </li> 
+                             
+                           
 
                         </ul>
                     </div>
-                </div>
+                </div> */}
+                 <div className="container">
+      <a className="navbar-brand" href="index.html">
+        <span className="flaticon-pawprint-1 mr-2" />
+        FurEver Home
+      </a>
+      <button
+         className="navbar-toggler"
+         type="button"
+         data-toggle="collapse"
+         data-target="#ftco-nav"
+         aria-controls="ftco-nav"
+         aria-expanded="false"
+         aria-label="Toggle navigation"
+      >
+        <span className="fa fa-bars" /> Menu
+      </button>
+      <div className="collapse navbar-collapse" id="ftco-nav">
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item ">
+                      <Link to="/" className="nav-link">
+                        HOME
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to={"/about"} className="nav-link">
+                        ABOUT
+                      </Link>
+                    </li>
+
+                   
+                    {/* <li className="nav-item">
+                      <Link to={"/services"} className="nav-link">
+                        Services
+                      </Link>
+                    </li> */}
+
+                     <li className="nav-item">
+                      <Link to={"/ReqForm"} className="nav-link">
+                        ADOPTION REQUESTS
+                      </Link>
+                    </li>
+
+                    
+                   
+                    <li className="nav-item">
+                      <Link to={"/viewBreeds"} className="nav-link">
+                        BREEDS
+                      </Link>
+                    </li>
+
+                    <li className="nav-item">
+                      <Link to={"/viewNGO"} className="nav-link">
+                        NGO
+                      </Link>
+                    </li>
+
+                    {/* <li className="nav-item">
+                      <Link to={"/contact"} className="nav-link">
+                        Contact
+                      </Link>
+                    </li> */}
+
+                    <li className="nav-item">
+                      <Link to={"/viewPets"} className="nav-link">
+                        PETS
+                      </Link>
+                    </li>
+
+                    {
+                      isLogin?
+                      <li className="nav-item">
+                        <Link to={"#"} onClick={logout} className="nav-link">
+                          LOGOUT {name}
+                        </Link>
+                      </li>
+                      :
+                      <li className="nav-item">
+                        <Link to={"/login"} className="nav-link">
+                          LOGIN
+                        </Link>
+                      </li>
+                    }
+                                  
+
+                  <li className="nav-item dropdown">
+                   <nav style={{ width:"100%"}}>
+                    <div
+                        style={{
+                          display:"flex",
+                          justifyContent:"center",
+                          alignItems:"center",
+                          height:"17px ",
+                          width: "100%",
+                          marginTop:"10px"
+                        }}
+                    />
+                      <button
+                        className="nav-link dropdown-toggle btn btn-primary text-dark" 
+                          
+                        id="navbarDropdown" 
+                        role="button" 
+                        data-toggle="dropdown" 
+                        aria-haspopup="true" 
+                        aria-expanded="false"
+                    
+                      >
+                        REGISTER
+                      </button>
+                      <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <Link to="/Register" className="dropdown-item">REGISTER AS USER</Link>
+                        <Link to="/NgoReg" className="dropdown-item">REGISTER AS NGO</Link>
+                     </div>
+                     </nav>
+                    </li>
+
+                      
+
+
+     </ul>
+      </div>
+    </div>
             </nav>
             {/* END nav */}
         </>

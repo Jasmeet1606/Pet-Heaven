@@ -84,7 +84,7 @@ export default function NgoReg() {
                   </a>
                 </span>{" "}
                 <span>
-                  Register <i className="ion-ios-arrow-forward" />
+                  Register as NGO <i className="ion-ios-arrow-forward" />
                 </span>
               </p>
               <h1 className="mb-0 bread">Register</h1>

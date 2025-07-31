@@ -81,7 +81,7 @@ export default function Register(){
                         </a>
                         </span>{" "}
                         <span>
-                        Register <i className="ion-ios-arrow-forward" />
+                        Register  as User<i className="ion-ios-arrow-forward" />
                         </span>
                     </p>
                     <h1 className="mb-0 bread">Register</h1>

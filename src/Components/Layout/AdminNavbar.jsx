@@ -143,7 +143,7 @@ export default function AdminNavbar(){
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">   
                         <Link class="dropdown-item" to={"/admin/user/manage"}>Manage users </Link>
-                         <Link class="dropdown-item" to={"/admin/users/ManagePayment"}>Manage Payment</Link>
+                          <Link class="dropdown-item" to={"/admin/users/update"}>Update users </Link>
                           <Link class="dropdown-item" to={"/admin/pages/adoption"}>Adoption</Link>
                     </div>
                 </li>

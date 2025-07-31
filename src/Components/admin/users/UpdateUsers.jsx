@@ -1,59 +1,72 @@
-import { addDoc, collection, Timestamp } from "firebase/firestore"
-import { useState } from "react"
+import { addDoc, collection, doc, getDoc, Timestamp, updateDoc } from "firebase/firestore"
+import { useEffect, useState } from "react"
 import { db } from "../../../Firebase"
 import { toast } from "react-toastify"
 import axios from "axios"
+import { Link, useNavigate, useParams } from "react-router-dom"
 
-export default function AddPets(){
-    const [petName, setPetName]=useState("")
+export default function Updateusers(){
+    const {id}=useParams()
+    const [userName, setuserName]=useState("")
     const [description, setDescription]=useState("")
     const [type, setType]=useState("")
     const [image, setImage]=useState({})
     const [imageName, setImageName]=useState("")
-    // const [url, setUrl]=useState("")
+    const [previousImg, setPreviousImg]=useState("")
+    useEffect(()=>{
+        fetchData()
+    },[])
+    const fetchData=async ()=>{
+       let userDoc=await getDoc(doc(db, "users", id))
+       let userData=userDoc.data()
+       setuserName(userData.userName)
+       setDescription(userData.description)
+       setType(userData.type)
+       setPreviousImg(userData.image)
+    }
     const handleForm=async (e)=>{
         e.preventDefault()
-        const formData = new FormData();
-        formData.append("file", image);
-        formData.append("upload_preset", "images"); // Replace with your upload preset
+        if(!!imageName){
+            const formData = new FormData();
+            formData.append("file", image);
+            formData.append("upload_preset", "images"); // Replace with your upload preset
 
-        try {
-            const response = await axios.post(
-                `https://api.cloudinary.com/v1_1/duxrhg4s0/image/upload`, // Replace with your Cloudinary cloud name
-                formData
-            );
-            saveData(response.data.secure_url)
-        } catch (error) {
-            toast.error("Error uploading image:", error.message);
+            try {
+                const response = await axios.post(
+                    `https://api.cloudinary.com/v1_1/duxrhg4s0/image/upload`, // Replace with your Cloudinary cloud name
+                    formData
+                );
+                saveData(response.data.secure_url)
+            } catch (error) {
+                toast.error("Error uploading image:", error.message);
+                // saveData("No_image")
+
+
+            }
+        }else{
+            saveData(previousImg)
         }
     }
     const changeImage=(e)=>{
         setImageName(e.target.value)
         setImage(e.target.files[0]);
     }
-
+    const nav=useNavigate()
     const saveData=async (imageUrl)=>{
          try{
             //insertion 
             let data={
-                petName,
+                userName,
                 description,
                 image:imageUrl,
                 type, 
-                ngoId:sessionStorage.getItem("userId"),
                 status:true,
                 createdAt:Timestamp.now()
             }
-         
-            //addDoc(collection(db, "collectionName"), data)
-            await addDoc(collection(db, "Pets"), data)
-            toast.success("Pet added successfully!")
-            setPetName("")
-            setDescription("")
-            setType("")
-            setImage({})
-            setImageName("")
-            // setUrl("")
+          
+            await updateDoc(doc(db, "users", id), data)
+            toast.success("user updated successfully!")
+            nav("/admin/user/manage")
         }
         catch(err){
             toast.error(err.message)
@@ -77,10 +90,10 @@ export default function AddPets(){
                         </a>
                         </span>{" "}
                         <span>
-                        Pet <i className="ion-ios-arrow-forward" />
+                        user <i className="ion-ios-arrow-forward" />
                         </span>
                     </p>
-                    <h1 className="mb-0 bread">Pet</h1>
+                    <h1 className="mb-0 bread">user</h1>
                     </div>
                 </div>
                 </div>
@@ -91,7 +104,8 @@ export default function AddPets(){
             <div className="row justify-content-center no-gutters">
               <div className="col-md-7" style={{boxShadow:"0px 0px 15px gray"}}>
                 <div className="contact-wrap w-100 p-md-5 p-4">
-                  <h3 className="mb-4">Add Pet</h3>
+                  <h3 className="mb-4">Edit user</h3>
+                  <img src={previousImg} style={{height:"100px", width:"100px"}} className="d-block mx-auto rounded-circle" alt="" />
                   <form
                     method="POST"
                     id="contactForm"
@@ -104,17 +118,17 @@ export default function AddPets(){
                       <div className="col-md-12">
                         <div className="form-group">
                           <label className="label" htmlFor="email">
-                            Pet Name
+                            user Name
                           </label>
                           <input
                             type="text"
                             className="form-control"
                             name="description"
-                            id="petName"
-                            placeholder="Pet Name"
-                            value={petName}
+                            id="userName"
+                            placeholder="user Name"
+                            value={userName}
                             onChange={(e)=>{
-                                setPetName(e.target.value)
+                                setuserName(e.target.value)
                             }}
                           />
                         </div>
@@ -191,3 +205,5 @@ export default function AddPets(){
         </>
     )
 }
+
+

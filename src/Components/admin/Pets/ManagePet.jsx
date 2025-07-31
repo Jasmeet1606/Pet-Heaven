@@ -14,7 +14,7 @@ export default function ManagePet(){
 
     const fetchData=()=>{
         const q=query(collection(db,"Pets")
-        // ,where("type","==","Dog")
+        ,where("ngoId","==",sessionStorage.getItem("userId"))
     ) 
         onSnapshot(q,(petData)=>{
             setAllpet(

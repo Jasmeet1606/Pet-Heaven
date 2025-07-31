@@ -3,7 +3,7 @@ import { db } from "../../Firebase"
 import { collection, getDocs, addDoc, Timestamp } from "firebase/firestore"
 import { getAuth } from "firebase/auth"
 import { toast } from "react-toastify"
-
+  import { Link } from "react-router-dom"
 export default function WatchPets() {
   const [pets, setPets] = useState([])
   const [loading, setLoading] = useState(true)
@@ -45,8 +45,8 @@ export default function WatchPets() {
       await addDoc(collection(db, "adoptions"), {
         petId: pet.id,
         petName: pet.petName,
-        // breed: pet.breed,
-        // type: pet.type,
+        breed: pet.breedName,
+        type: pet.type,
         image: pet.image,
         status: "pending",
         // userId: user.uid, 
@@ -63,6 +63,7 @@ export default function WatchPets() {
   if (pets.length === 0) return <h4 className="text-center">No Pets Found</h4>
 
   return (
+  
     <div className="container mt-4">
       <h3 className="mb-4">Adopt A Pet</h3>
       <div className="row">
@@ -72,9 +73,12 @@ export default function WatchPets() {
               <img src={pet.image} className="card-img-top" alt={pet.name} style={{ height: 250, objectFit: "cover" }} />
               <div className="card-body">
                 <h5>{pet.name}</h5>
-                <p><strong>Breed:</strong> {pet.breed}</p>
+                <p><strong>Breed:</strong> {pet.petName}</p>
                 <p><strong>Type:</strong> {pet.type}</p>
-                <button onClick={() => handleAdopt(pet)} className="btn btn-primary w-100">Adopt</button>
+                {/* <button onClick={() => handleAdopt(pet)} className="btn btn-primary w-100">Adopt</button> */}
+                  {pet?.status &&
+                  <Link to={"/ReqForm/"+pet?.id+"/"+pet?.ngoId} className="btn btn-primary">Adopt</Link>
+                  }
               </div>
             </div>
           </div>

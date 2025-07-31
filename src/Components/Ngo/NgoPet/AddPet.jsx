@@ -41,6 +41,7 @@ export default function AddPet(){
                 image:imageUrl,
                 type, 
                 status:true,
+                ngoId:sessionStorage.getItem("userId"),
                 createdAt:Timestamp.now()
             }
             // console.log(data);

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../../Firebase";
 
-export default function ViewPets() {
+export default function ViewPet() {
   const [pets, setPets] = useState([]);
 
   useEffect(() => {

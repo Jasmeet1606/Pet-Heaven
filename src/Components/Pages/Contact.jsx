@@ -330,6 +330,20 @@ export default function Contact(){
                                   />
                                 </div>
                               </div>
+                                 <div className="col-md-12">
+                                <div className="form-group">
+                                  <label className="label" htmlFor="subject">
+                                   Phone no.
+                                  </label>
+                                  <input
+                                    type="number"
+                                    className="form-control"
+                                    name="subject"
+                                    id="subject"
+                                    placeholder="Subject"
+                                  />
+                                </div>
+                              </div>
                               <div className="col-md-12">
                                 <div className="form-group">
                                   <label className="label" htmlFor="#">
