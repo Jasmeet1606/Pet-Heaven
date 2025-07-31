@@ -164,7 +164,7 @@ export default function Header() {
                  <div className="container">
       <a className="navbar-brand" href="index.html">
         <span className="flaticon-pawprint-1 mr-2" />
-        FurEver Home
+       Pet Heaven
       </a>
       <button
          className="navbar-toggler"
@@ -198,7 +198,7 @@ export default function Header() {
                     </li> */}
 
                      <li className="nav-item">
-                      <Link to={"/ReqForm"} className="nav-link">
+                      <Link to={"/adoption"} className="nav-link">
                         ADOPTION REQUESTS
                       </Link>
                     </li>
@@ -206,7 +206,7 @@ export default function Header() {
                     
                    
                     <li className="nav-item">
-                      <Link to={"/viewBreeds"} className="nav-link">
+                      <Link to={"/viewBreed"} className="nav-link">
                         BREEDS
                       </Link>
                     </li>
@@ -271,7 +271,7 @@ export default function Header() {
                       </button>
                       <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                         <Link to="/Register" className="dropdown-item">REGISTER AS USER</Link>
-                        <Link to="/NgoReg" className="dropdown-item">REGISTER AS NGO</Link>
+                        <Link to="/RegisterNGO" className="dropdown-item">REGISTER AS NGO</Link>
                      </div>
                      </nav>
                     </li>

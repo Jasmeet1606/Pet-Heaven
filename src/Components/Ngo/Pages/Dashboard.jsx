@@ -47,7 +47,7 @@ export default function DashboardNgo(){
     // }
 
     const fetchPetListingCount=async ()=>{
-        let petListingCount= await getCountFromServer(collection(db,"pets"))
+        let petListingCount= await getCountFromServer(collection(db,"Pets"))
         setPet(petListingCount.data().count);
         
     }

@@ -5,7 +5,7 @@ import { toast } from "react-toastify"
 import { doc, getDoc, setDoc, Timestamp } from "firebase/firestore"
 import { useNavigate } from "react-router-dom"
 
-export default function AddNgo() {
+export default function AddNGO() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")

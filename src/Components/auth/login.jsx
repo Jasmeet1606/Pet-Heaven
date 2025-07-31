@@ -182,7 +182,7 @@ export default function Login(){
                   </div>
                     <div>
                    Register as Ngo!!
-                    <Link to={"/ngoReg"}>Ngo</Link>
+                    <Link to={"/RegisterNGO"}>Ngo</Link>
                   </div>
                 </div>
               </div>
