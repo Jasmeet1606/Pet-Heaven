@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, Timestamp, updateDoc } from "firebase/firestore"
+import { addDoc, collection, doc, getDoc, onSnapshot, Timestamp, updateDoc } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { db } from "../../../Firebase"
 import { toast } from "react-toastify"
@@ -14,6 +14,8 @@ export default function UpdatePetsListings(){
     const [image, setImage]=useState({})
     const [imageName, setImageName]=useState("")
      const [previousImg, setPreviousImg]=useState("")
+      const [BreedData,setBreedData]=useState([])
+        const [petType,setPetType]=useState("")
     useEffect(()=>{
                 fetchData()
             },[])
@@ -26,6 +28,18 @@ export default function UpdatePetsListings(){
                setBreed(petData.breed)
                setPreviousImg(petData.image)
             }
+
+       
+           useEffect(()=>{
+             onSnapshot(collection(db,"breed"),(data)=>{
+               setBreedData(data.docs.map((el)=>{
+                 return {id:el.id ,  ...el.data()}
+                 
+               }))
+               
+             })
+           },[])
+
     const handleForm=async (e)=>{
         e.preventDefault()
         if(!!imageName){
@@ -61,6 +75,7 @@ export default function UpdatePetsListings(){
                 image:imageUrl,
                 age, 
                 breed,
+                type:petType,
                 status:true,
                 createdAt:Timestamp.now()
             }
@@ -206,13 +221,33 @@ export default function UpdatePetsListings(){
                             }}
                           >
                             <option disabled selected value={""}>Choose one</option>
-                            <option>pug</option>
-                            <option>husky</option>
-                            <option>pit bull</option>
-                            <option>spoted cat</option>
-                            <option>Doberman</option>
+                            {
+                              BreedData.map((el)=>{
+                                return <option value={el.id}>{el.breedName}</option>
+                              })
+                            }
                           </select>
                         </div>
+                         <div className="col-md-12">
+                        <div className="form-group">
+                          <label className="label" htmlFor="subject">
+                            Type
+                          </label>
+                          <select
+                            className="form-control"
+                            value={petType}
+                            onChange={(e)=>{
+                                setPetType(e.target.value)
+                            }}
+                          >
+                            <option disabled selected value={""}>Choose one</option>
+                            <option   value={"Dog"}>Dog</option>
+                            <option   value={"Cat"}>Cat</option>
+                            
+                            
+                          </select>
+                        </div>
+                      </div>
                       </div>
                       <div className="col-md-12">
                         <div className="form-group">

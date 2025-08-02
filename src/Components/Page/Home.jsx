@@ -2,23 +2,24 @@ export default function Home(){
     return(
         <>
   <div
-    className="hero-wrap js-fullheight"
-    style={{ backgroundImage: 'url("/assets/images/bg_1.jpg")' }}
-    data-stellar-background-ratio="0.5"
+    className="hero-wrap js-fullheight d-flex align-items-center"
+    style={{ backgroundImage: 'url("/assets/images/bg_1.jpg")',height:`712px` }}
+    data-stellar-background-ratio="0.5" 
   >
+    
     <div className="overlay" />
     <div className="container">
       <div
         className="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
         data-scrollax-parent="true"
       >
-        <div className="col-md-11 ftco-animate text-center">
-          <h1 className="mb-4">Highest Quality Care For Pets You'll Love </h1>
-          <p>
+        <div className="col-md-11 ftco-animate text-center ">
+          <h1 className="mb-5 mt-5 pt-5 ">Highest Quality Care For Pets You'll Love </h1>
+          {/* <p>
             <a href="#" className="btn btn-primary mr-md-4 py-3 px-4">
               Learn more <span className="ion-ios-arrow-forward" />
             </a>
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

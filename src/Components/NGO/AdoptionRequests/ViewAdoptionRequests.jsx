@@ -1,112 +1,110 @@
-import { addDoc, collection, onSnapshot, Timestamp } from "firebase/firestore"
+
 import { useEffect, useState } from "react"
-import { db } from "../../../Firebase"
+
+import { collection, getDocs, addDoc, Timestamp, query, onSnapshot, where, getDoc, doc } from "firebase/firestore"
+import { getAuth } from "firebase/auth"
 import { toast } from "react-toastify"
-import axios from "axios"
+  import { Link } from "react-router-dom"
+import { db } from "../../../Firebase"
+export default function ViewAdoptionRequests() {
+  const [pets, setPets] = useState([])
+  const [loading, setLoading] = useState(true)
 
-export default function ViewAdoptionRequests(){
-
-    const [requests,setRequests]=useState([])
-       
-    const fetchData=()=>{
-       onSnapshot(collection(db,"adoptionRequest"),(usersData)=>{
-       
-         setRequests(
-            usersData.docs.map((el)=>{
-            // console.log(el.id,el.data());
-            return{id:el.id,...el.data()}
-
-
-            
-
-            
+ const fetchData=()=>{
+        const q=query(collection(db,"adoptionRequest")
+        ,where("userId","==",sessionStorage.getItem("userId"))
+    ) 
+        onSnapshot(q,async (adoptionDoc)=>{
+        
+               let adoptionData= adoptionDoc.docs.map((el)=>{
+                // console.log(el.id,el.data());
+                return{id:el.id,...el.data()}
+            })
+            let updateData=[]
+            for(let i=0;i<adoptionData.length;i++){
+                let userId=adoptionData[i].userId 
+                let userDoc=await getDoc(doc(db,"users", userId))
+                let userData=userDoc.data()
+                let ngoId=adoptionData[i].ngoId 
+                let ngoDoc=await getDoc(doc(db,"users", ngoId))
+                let ngoData=ngoDoc.data()
+                let petId=adoptionData[i].petId 
+                let petDoc=await getDoc(doc(db,"Pets", petId))
+                let petData=petDoc.data()
+                updateData.push({...adoptionData[i],pet:petData, ngo:ngoData, user:userData});
+                
+            }
+            setPets(updateData)
+            // setLoad(false)
         })
-        
-         )
-       
-        
-       })
-        
+        setLoading(false)
     }
-
-
     useEffect(()=>{
         fetchData()
-        // console.log(AllBreeds);
-        
     },[])
+
+
+  const handleAdopt = async (pet) => {
+    // const auth = getAuth()
+    // const user = auth.currentUser
+      const user = getAuth().currentUser
+    // console.log("User:", user)
+
+
+    // if (!user) return toast.error("Login required")
+      
+
+
+  if (!user) {
+    toast.error("Login required")
+    return
+  }
+
+
+
+    try {
+      await addDoc(collection(db, "adoptions"), {
+        petId: pet.id,
+        petName: pet.petName,
+        breed: pet.breedName,
+        type: pet.type,
+        image: pet.image,
+        status: "pending",
+        // userId: user.uid, 
+       
+        createdAt: Timestamp.now()
+      })
+      toast.success("Adoption request sent!")
+    } catch (err) {
+      toast.error("Adoption failed")
+    }
+  }
+
+  if (loading) return <h4 className="text-center">Loading...</h4>
+  if (pets.length === 0) return <h4 className="text-center">No Pets Found</h4>
+
+  return (
   
-    return(
-        <>
-        <section
-                className="hero-wrap hero-wrap-2"
-                style={{ backgroundImage: 'url("/assets/images/bg_2.jpg")' }}
-                data-stellar-background-ratio="0.5"
-            >
-                <div className="overlay" />
-                <div className="container">
-                <div className="row no-gutters slider-text align-items-end">
-                    <div className="col-md-9 ftco-animate pb-5">
-                    <p className="breadcrumbs mb-2">
-                        <span className="mr-2">
-                        <a href="index.html">
-                            Home <i className="ion-ios-arrow-forward" />
-                        </a>
-                        </span>{" "}
-                        <span>
-                        Requests <i className="ion-ios-arrow-forward" />
-                        </span>
-                    </p>
-                    <h1 className="mb-0 bread">Requests</h1>
-                    </div>
+    <div className="container mt-4">
+      <h3 className="mb-4">Adopt A Pet</h3>
+      <div className="row">
+        {pets.map((pet) => (
+          <div className="col-md-4 mb-4" key={pet.id}>
+            <div className="card h-100 shadow">
+              <img src={pet?.pet?.image} className="card-img-top" alt={pet?.pet?.petName} style={{ height: 250, objectFit: "cover" }} />
+              <div className="card-body">
+                <h5>{pet?.pet?.petName}</h5>
+                <div>
+                    NGO Details:
+                    <p>{pet?.ngo?.name}</p>
+                    <p>{pet?.ngo?.email}</p>
                 </div>
-                </div>
-            </section>
-            <div className="container-fluid my-5">
-
-                {/* contact form  */}
-            <div className="row justify-content-center no-gutters">
-              <div className="col-md-7" style={{boxShadow:"0px 0px 15px gray"}}>
-                <div className=" table-responsive-md contact-wrap w-3000 p-md-5 p-4">
-                  <h3 className="mb-4"> View Adoption Requests</h3>
-                  <table className="table table-striped">
-                                    <thead>
-                                        <tr>
-                                        <th scope="col">S.No</th>
-                                        <th scope="col">name</th>
-                        
-                                        <th scope="col">contact</th>
-                                
-                                        <th scope="col">Image</th>
-                                        <th scope="col">reasonToAdopt</th>
-                                        </tr>
-                                    </thead>
-                  {
-                    requests.map((el,index)=>{
-                        return  <tbody>
-                                        <tr>
-                                        <th scope="row">{index+1}</th>
-                                        <td>{el.name}</td>
-                                        {/* <td>{el.email}</td> */}
-                                        <td>{el.contact}</td>
-                                        {/* <td>{el.address}</td> */}
-                                        <td><img className="img-fluid" src={el.image} alt="" /></td>
-                                        <td>{el.reasonToAdopt}</td>
-                                         
-                                        </tr>
-                                       
-                                    </tbody>
-                    })
-                  }
-                    </table>
-
-                 
-                </div>
+                <p>Status : {pet?.status}</p>
               </div>
-             
             </div>
-            </div>
-
-        </>
-    )
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }

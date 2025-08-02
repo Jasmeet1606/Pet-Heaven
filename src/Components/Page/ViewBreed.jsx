@@ -181,18 +181,19 @@ export default function ViewBreeds(){
 
                 <div className="row justify-content-center no-gutters">
                     <div className="col-md-12 d-flex justify-content-evenly">
-                        <button  className={`btn btn-outline-primary ${type=="All" && "active"}`} onClick={()=>{
+                        
+                        <button  className={`btn btn-outline-primary ${type=="All" && ""}`} onClick={()=>{
                             setType("All")
                         }}>All</button>
-                        <button  className={`btn btn-outline-primary ${type=="Dog" && "active"}`}onClick={()=>{
+                        <button  className={`btn btn-primary ${type=="Dog" && "active"}`}onClick={()=>{
                             setType("Dog")
                         }}>Dog</button>
-                        <button  className={`btn btn-outline-primary ${type=="Cat" && "active"}`}onClick={()=>{
+                        <button  className={`btn btn-primary ${type=="Cat" && "active"}`}onClick={()=>{
                             setType("Cat")
                         }}>Cat</button>
                        
                     </div>
-                            <h3 className="mb-4">Breeds</h3>  
+                            <h3 className="mb-6">Breeds</h3>  
                                     {AllBreeds.map((el, index) => (
                                         <div key={index} className="col-md-4 mb-4" style={{ marginBottom: '20px', textAlign:"center"}}>
                                         <div className="card-container mx-3 justify-content-center" style={{
@@ -213,7 +214,7 @@ export default function ViewBreeds(){
                                             borderRadius: '10px',
                                             marginBottom: '10px',
                                             }} className="img-fluid mb-2" />
-                                            <Link className="btn btn-outline-primary d-block mx-auto" to={`/ViewPets/${el.id}`}>View Pets</Link>
+                                            <Link className="btn btn-primary d-block mx-auto" to={`/ViewPets/${el.id}`}>View Pets</Link>
                                             {/* <img src={el.bankStatements} alt="Bank Statements" style={{
                                             maxWidth: '70px',
                                             height: '70px',

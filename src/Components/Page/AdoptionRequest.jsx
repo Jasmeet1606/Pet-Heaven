@@ -305,16 +305,17 @@ export default function AdoptionRequest(){
                 salary,
                 contact,
                 image:imageUrl,
-                address, 
+                 
                 reasonToAdopt,
                 status:"Pending",
                 createdAt:Timestamp.now()
             }
             // console.log(data);
             //addDoc(collection(db, "collectionName"), data)
+            console.log("Saving adoption request with data:", data);
             await addDoc(collection(db, "adoptionRequest"), data)
             toast.success("Request added successfully!")
-            nav("/myadoption")
+            nav("/viewPets")
         }
         catch(err){
             toast.error(err.message)

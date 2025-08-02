@@ -4,13 +4,14 @@ import { db } from "../../../Firebase"
 import { toast } from "react-toastify"
 import axios from "axios"
 import Swal from "sweetalert2"
-import { CircleLoader, PacmanLoader } from "react-spinners"
+import {FadeLoader } from "react-spinners"
 import { Link } from "react-router-dom"
 
 export default function ManagePetsListing(){
     const [load, setLoad]=useState(true)
 
     const [petListing,setPetListing]=useState([])
+    const [BreedList,setBreedList]=useState([])
 
     const fetchData=()=>{
        onSnapshot(collection(db,"Pets"),(petsData)=>{
@@ -18,13 +19,17 @@ export default function ManagePetsListing(){
          setPetListing(
             petsData.docs.map((el)=>{
             // console.log(el.id,el.data());
-            return{id:el.id,...el.data()}
-
-            
+            return{id:el.id,...el.data()}         
 
             
         })
-         )
+
+    )
+    onSnapshot(collection(db,"breed"),(doc)=>{
+        setBreedList(doc.docs.map((el)=>{
+            return {id:el.id, ...el.data()}
+        }))
+    })
          setLoad(false)
 
         
@@ -50,7 +55,7 @@ export default function ManagePetsListing(){
                                 confirmButtonText: "Yes, delete it!"
                                 }).then(async (result) => {
                                 if (result.isConfirmed) {
-                                    await deleteDoc(doc(db,"pets",userId))
+                                    await deleteDoc(doc(db,"Pets",userId))
                                     .then(()=>{
                                         Swal.fire({
                                         title: "Deleted!",
@@ -106,7 +111,7 @@ export default function ManagePetsListing(){
             <div className="container my-5">
 
                 {load?
-            <CircleLoader color="#00BD56" size={30} cssOverride={{display:"block", margin:"0 auto"}} loading={load}/>
+            <FadeLoader color="#00BD56" size={30} cssOverride={{display:"block", margin:"0 auto"}} loading={load}/>
             :
            
 
@@ -133,7 +138,15 @@ export default function ManagePetsListing(){
                                         <tr>
                                         <th scope="row">{index+1}</th>
                                         <td>{el.petName}</td>
-                                        <td>{el.breed}</td>
+                                        <td>
+                                            {
+                                                BreedList.map((e)=>{
+                                                    if(el.breed==e.id){
+                                                        return e.breedName
+                                                    }
+                                                })
+                                            }
+                                        </td>
                                         <td>{el.description}</td>
                                          <td><img className="img-fluid" src={el.image} alt=""  style={{height:"50px", width:"50px"}} /></td>
                                          <td>{el.age}</td>

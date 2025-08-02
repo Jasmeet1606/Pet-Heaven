@@ -197,13 +197,13 @@ export default function Header() {
                       </Link>
                     </li> */}
 
-                     <li className="nav-item">
+                     {/* <li className="nav-item">
                       <Link to={"/adoption"} className="nav-link">
                         ADOPTION REQUESTS
                       </Link>
-                    </li>
+                    </li> */}
 
-                    
+                      
                    
                     <li className="nav-item">
                       <Link to={"/viewBreed"} className="nav-link">
@@ -231,11 +231,23 @@ export default function Header() {
 
                     {
                       isLogin?
+                      <>
+                      <li className="dropdown nav-item">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                           Adoptions
+                                        </a>
+                    
+                                          <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                           
+                                            <Link to="/viewAdoption" className="dropdown-item">View</Link>
+                                         </div>
+                                        </li>
                       <li className="nav-item">
                         <Link to={"#"} onClick={logout} className="nav-link">
                           LOGOUT {name}
                         </Link>
                       </li>
+                      </>
                       :
                       <li className="nav-item">
                         <Link to={"/login"} className="nav-link">

@@ -106,7 +106,7 @@ export default function DashboardNgo(){
             </div>
           </div>
         </div> */}
-        <div className="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
+        <div className="col-md-6 d-flex align-self-stretch px-5 ftco-animate">
           <div className="d-block services text-center"style={{marginTop: "100px"}}>
             <div className="icon d-flex align-items-center justify-content-center">
               <span className="flaticon-dog-eating" />
@@ -124,43 +124,8 @@ export default function DashboardNgo(){
             </div>
           </div>
         </div>
-        {/* <div className="col-md-4 d-flex align-self-stretch px-4 ftco-animate">
-          <div className="d-block services text-center">
-            <div className="icon d-flex align-items-center justify-content-center">
-              <span className="flaticon-grooming" />
-            </div>
-            <div className="media-body">
-              <h3 className="heading">Total Users</h3>
-              <h1>{user}</h1>
-              <Link
-                to={"/admin/users/manage"}
-                className="btn-custom d-flex align-items-center justify-content-center"
-              >
-                <span className="fa fa-chevron-right" />
-                <i className="sr-only">Read more</i>
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4 d-flex align-self-stretch px-4  ftco-animate">
-          <div className="d-block services text-center" style={{marginTop: "100px"}}>
-            <div className="icon d-flex align-items-center justify-content-center">
-              <span className="flaticon-grooming" />
-            </div>
-            <div className="media-body">
-              <h3 className="heading">Total NGO's</h3>
-              <h1>{ngo}</h1>
-              <Link
-                to={"/admin/Ngo/manage"}
-                className="btn-custom d-flex align-items-center justify-content-center"
-              >
-                <span className="fa fa-chevron-right" />
-                <i className="sr-only">Read more</i>
-              </Link>
-            </div>
-          </div>
-        </div> */}
-        <div className="col-md-4 d-flex align-self-stretch px-4  ftco-animate">
+        
+        <div className="col-md-6 d-flex align-self-stretch px-5  ftco-animate">
           <div className="d-block services text-center" style={{marginTop: "100px"}}>
             <div className="icon d-flex align-items-center justify-content-center">
               <span className="flaticon-grooming" />
