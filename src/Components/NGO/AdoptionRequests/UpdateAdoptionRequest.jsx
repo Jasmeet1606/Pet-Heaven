@@ -71,7 +71,7 @@ export default function UpdateAdoptionRequest(){
               
                 image:imageUrl,
                 addressProof, 
-                reasonToAdopt,
+                
                 status:true,
                 createdAt:Timestamp.now()
             }
